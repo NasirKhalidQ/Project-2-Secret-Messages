@@ -22,10 +22,16 @@ def run_program():
           '-Keyword \n'
           '-Affine \n\n\n'
           )
-
+    valid_ciphers = ['caesar', 'atbash', 'keyword', 'affine']
     response = input('Which cipher would you like to use?')
     response = response.lower()
 
+    while response not in valid_ciphers:
+        print('That is an invalid cipher. Please choose from the list')
+        response = input('Which cipher would you like to use?')
+        response = response.lower()
+
+    our_class = None
     if response == 'keyword':
         our_class = Keyword()
     elif response == 'atbash':
@@ -36,8 +42,15 @@ def run_program():
         our_class = Affine()
 
     text = input("That's an excellent cipher. What's the message?")
+    valid_actions = ['encrypt', 'decrypt']
     action = input('Are we going to encrypt or decrypt?')
+    action = action.lower()
 
+    while action not in valid_actions:
+        print("That is not a valid action. Please either type 'encrypt' or "
+              "'decrypt'")
+        action = input('Are we going to encrypt or decrypt?')
+        action = action.lower()
     if action == 'encrypt':
         print(our_class.encrypt(text))
     elif action == 'decrypt':
